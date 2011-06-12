@@ -31,5 +31,14 @@ $settings = array(
     'view' => array(
         'viewPath' => APPLICATION_PATH . DIRECTORY_SEPARATOR . 'views',
         'template' => 'template.tpl'
+    ),
+    'database' => array(
+        'adapter' => 'mysql',
+        'params' => array(
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'dbname' => 'mymvc'
+        )
     )
 );

@@ -4,7 +4,8 @@ class MVC_Autoload_Resource
 {
 
     protected static $_resources = array(
-        'controller' => '@App_Controller_(\w+)Controller@',
+        'controller' => '@App_Controller_(\w+)Controller@', // контроллеры
+        'model' => '@App_Model_(\w+)@' // модели
     );
 
     public static function autoload($className)
@@ -27,6 +28,11 @@ class MVC_Autoload_Resource
                         . "{$name}Controller.php";
 
 
+                break;
+            case 'model':
+                require_once APPLICATION_PATH . DIRECTORY_SEPARATOR
+                        . 'models' . DIRECTORY_SEPARATOR
+                        . "{$name}.php";
                 break;
 
             default:

@@ -1,11 +1,16 @@
 <html>
     <head>
-        <title>title</title>
+        <title>My first PHP MVC framework</title>
     </head>
     <body>
-        <h1>template</h1>
+        <ul>
+            <li><a href='/'>Mainpage</a></li>
+        </ul>
+        <h1>just test, nothing serious</h1>
         {include file="$tplName"}
-        <h2>footer</h2>
+        <p>
+            All rights reserved &copy; <a href="http://vredniy.ru">Vredniy.ru</a>
+        </p>
     </body>
 </html>
 
