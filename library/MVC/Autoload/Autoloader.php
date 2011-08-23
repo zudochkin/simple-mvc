@@ -2,23 +2,26 @@
 
 class MVC_Autoload_Autoloader
 {
-
-    public static function autoload($className)
-    {
-        
-        $className = str_replace('_', '/', $className);
-        $classPath = LIBRARY_PATH . DIRECTORY_SEPARATOR . $className . '.php';
-        if (file_exists($classPath) && is_readable($classPath)) {
-            require_once $classPath;
-        } else {
-            //throw new MVC_Exception("Class name '{$className}' not found");
+    protected static $_autoloaders = array();
+    
+    public static function load($class) {
+        $loaded = false;
+        foreach(self::$_autoloaders as $autoloader) {
+            if ($classPath = $autoloader->load($class)) {
+                $loaded = true;
+                require_once $classPath;
+                continue;
+            }
+                
         }
-        //echo $classPath;
+        //if (!$loaded) 
+          //  throw new MVC_Autoload_Exception("Class '{$class}' cannot be found");
+        
     }
 
-    public static function registerAutoload()
+    public static function registerAutoload(MVC_Autoload_Interface $autoloader)
     {
-        
+        self::$_autoloaders[] = $autoloader;
     }
 
 }

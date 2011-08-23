@@ -8,7 +8,11 @@ set_include_path(implode(DIRECTORY_SEPARATOR, array(
         )));
 
 require_once 'MVC/Autoload/Autoloader.php';
-spl_autoload_register(array('MVC_Autoload_Autoloader', 'autoload'));
+require_once 'MVC/Autoload/Default.php';
+MVC_Autoload_Autoloader::registerAutoload(new MVC_Autoload_Default());
+
+
+spl_autoload_register(array('MVC_Autoload_Autoloader', 'load'));
 
 
 //require 'MVC_FrontController.php';

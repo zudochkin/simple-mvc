@@ -9,11 +9,16 @@ class MVC_FrontController
     protected $_action;
     protected $_params;
 
+
     public function __construct($request)
     {
+        $this->_initResourceAutoloader();
         $this->_initConfigs();
         $this->_initResources();
         $this->_initRoutes();
+    }
+    protected function _initResourceAutoloader() {
+        
     }
 
     protected function _parseRequest()
@@ -61,7 +66,8 @@ class MVC_FrontController
      */
     protected function _initResources()
     {
-        spl_autoload_register(array('MVC_Autoload_Resource', 'autoload'));
+        //spl_autoload_register(array('MVC_Autoload_Resource', 'autoload'));
+        MVC_Autoload_Autoloader::registerAutoload(new MVC_Autoload_Resource());
     }
 
     /**
