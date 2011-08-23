@@ -12,14 +12,11 @@ class MVC_FrontController
 
     public function __construct($request)
     {
-        $this->_initResourceAutoloader();
         $this->_initConfigs();
         $this->_initResources();
         $this->_initRoutes();
     }
-    protected function _initResourceAutoloader() {
-        
-    }
+    
 
     protected function _parseRequest()
     {
