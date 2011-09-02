@@ -108,16 +108,15 @@ class MVC_FrontController
                         //    $this->_params[$paramName] = $matches[$param];
                         //}
                     //}
-                    var_dump(explode('/', $matches[0]));
+                    
                     $params = explode('/', $matches[0]);
                     
-                    $contoller = array_shift($params);
-                    echo 'controller'; var_dump($contoller);
-                    $action = array_shift($params);
-                    echo 'action'; var_dump($action);
+                    $this->_contoller = array_shift($params);
+                    echo 'controller'; var_dump($this->_contoller);
+                    $this->_action = array_shift($params);
+                    echo 'action'; var_dump($this->_action);
                     echo 'matches';
-                    var_dump($matches);
-                    //var_dump
+
                     $param = array();
                     do {
                         $param[array_shift($params)] = array_shift($params);
@@ -143,8 +142,10 @@ class MVC_FrontController
     protected function _dispatch($activeRoute)
     {
         if (isset($this->_routes[$activeRoute])) {
-            $this->_controller = $this->_routes[$activeRoute]['controller'];
-            $this->_action = $this->_routes[$activeRoute]['action'];
+            if (!$this->_controller)
+                $this->_controller = $this->_routes[$activeRoute]['controller'];
+            if (!$this->_action)
+                $this->_action = $this->_routes[$activeRoute]['action'];
         }
     }
 
