@@ -8,8 +8,8 @@ set_include_path(implode(DIRECTORY_SEPARATOR, array(
         )));
 
 require_once 'MVC/Autoload/Autoloader.php';
-require_once 'MVC/Autoload/Default.php';
-MVC_Autoload_Autoloader::registerAutoload(new MVC_Autoload_Default());
+
+MVC_Autoload_Autoloader::registerAutoload();
 
 
 spl_autoload_register(array('MVC_Autoload_Autoloader', 'load'));

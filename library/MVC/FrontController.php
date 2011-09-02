@@ -12,9 +12,15 @@ class MVC_FrontController
 
     public function __construct($request)
     {
+        $this->_initSession();
         $this->_initConfigs();
         $this->_initResources();
         $this->_initRoutes();
+    }
+    
+    protected function _initSession()
+    {
+        session_start();
     }
     
 
@@ -92,19 +98,38 @@ class MVC_FrontController
             $activeRoute = null;
 
             foreach($this->_routes as $name => $routeSettings) {
+                var_dump($routeSettings);
                 if (!$routeSettings['template'])
                     continue;
                 if (preg_match('@' . $routeSettings['template'] . '@', $uri, $matches)) {
-                    if (isset($routeSettings['params'])) {
-                        foreach($routeSettings['params'] as $paramName => $param) {
-                            $this->_params[$paramName] = $matches[$param];
-                        }
-                    }
+                    var_dump($routeSettings['template']);
+                    //if (isset($routeSettings['params'])) {
+                      //  foreach($routeSettings['params'] as $paramName => $param) {
+                        //    $this->_params[$paramName] = $matches[$param];
+                        //}
+                    //}
+                    var_dump(explode('/', $matches[0]));
+                    $params = explode('/', $matches[0]);
+                    
+                    $contoller = array_shift($params);
+                    echo 'controller'; var_dump($contoller);
+                    $action = array_shift($params);
+                    echo 'action'; var_dump($action);
+                    echo 'matches';
+                    var_dump($matches);
+                    //var_dump
+                    $param = array();
+                    do {
+                        $param[array_shift($params)] = array_shift($params);
+                    } while (count($params));
+                    
+                    
+                    var_dump($param);
                     $activeRoute = $name;
                 }
             }
         } else {
-            $activeRoute = 'main';
+            $activeRoute = 'default';
         }
 
         return $activeRoute;

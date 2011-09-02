@@ -5,6 +5,16 @@ $settings = array(
         'applicationName' => 'first application'
     ),
     'routes' => array(
+    
+        'default' => array(
+            'template' => '^[^/]{1,}/[^/]{1,}/([^/]{1,}/[^/]{1,})*$',
+            'controller' => 'index',
+            'action' => 'index',
+            'params' => array(
+                'param1' => 1,
+                'param2' => 2
+            )
+        ),
         'static' => array(
             'template' => '^(\w+)\.html$',
             'controller' => 'static',
@@ -25,6 +35,14 @@ $settings = array(
             'params' => array(
                 'category' => 1,
                 'article' => 2
+            )
+        ),
+        'admin' => array(
+            'template' => '^admin\/(.*)$',
+            'controller' => 'admin',
+            'action' => 'index',
+            'params' => array(
+                'page' => 1
             )
         )
     ),
